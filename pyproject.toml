@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "consultor-cep"
+version = "0.1.0"
+description = ""
+authors = ["AngeloGagno <angelogagno@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+pydantic = "^2.10.6"
+requests = "^2.32.3"
+streamlit = "^1.43.1"
+taskipy = "^1.14.1"
+pytest = "^8.3.5"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
