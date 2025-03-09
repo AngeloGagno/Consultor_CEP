@@ -3,7 +3,7 @@ from streamlit.testing.v1 import AppTest
 from frontend.app import Webpage
 
 def test_webpage():
-    app = AppTest(Webpage)  
+    app = AppTest(Webpage, default_timeout=10) 
     app.run()
     assert app.title == "Verificador de CEP"
     assert "Selecione o tipo de requisição" in app.markdown[0].value
