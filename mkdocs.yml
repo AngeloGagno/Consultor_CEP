@@ -1,0 +1,28 @@
+site_name: "Consultor CEP"
+
+theme:
+  name: material  
+  features:
+    - content.code.annotate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Mudar para o modo escuro
+
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Mudar para o modo claro
+
+plugins:
+  - search
+  - mkdocstrings:
+      default_handler: python
+  - mermaid2
