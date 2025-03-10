@@ -1,5 +1,10 @@
 site_name: "Consultor CEP"
-
+nav:
+  - Sobre: index.md
+  - Projeto:       
+      - Estrutura e Organização: projeto.md
+      - Backend: backend.md
+      - Frontend: frontend.md
 theme:
   name: material  
   features:
