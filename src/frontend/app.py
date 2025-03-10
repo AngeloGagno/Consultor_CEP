@@ -15,19 +15,21 @@ class Webpage:
         self.handle_request()
 
     def show_title(self):
-        """Exibe o título da aplicação."""
-        st.title('Verificador de CEP')
+        """Exibe o título da aplicação com estilo personalizado."""
+        st.markdown("<h1 style='text-align: center; color: #4CAF50;'>Verificador de CEP</h1>", unsafe_allow_html=True)
 
     def show_subtitle(self):
-        """Exibe o subtítulo da aplicação."""
-        st.markdown('## Selecione o tipo de requisição')
+        """Exibe o subtítulo da aplicação com estilo personalizado."""
+        st.markdown("<h3 style='text-align: center; color: #3e8e41;'>Selecione o tipo de requisição</h3>", unsafe_allow_html=True)
 
     def select_request_type(self):
         """Permite ao usuário selecionar o tipo de consulta (CEP ou Endereço)."""
         return st.selectbox(
             'Formato de envio de dados',
             ['CEP', 'Endereço'],
-            placeholder='Selecione um formato'
+            index=0,
+            key='request_type',
+            help="Escolha entre procurar por CEP ou Endereço"
         )
 
     def get_state_selection(self):
@@ -37,15 +39,15 @@ class Webpage:
             "MS", "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", 
             "RR", "SC", "SP", "SE", "TO"
         ]
-        return st.selectbox('Selecione um estado', estados)
+        return st.selectbox('Selecione um estado', estados, key='state')
 
     def get_text_input(self, label):
-        """Exibe um campo de entrada de texto."""
-        return st.text_input(label)
+        """Exibe um campo de entrada de texto com estilo."""
+        return st.text_input(label, key=label)
 
     def submit_button(self):
-        """Cria um botão de envio."""
-        return st.button('Enviar dados')
+        """Cria um botão de envio com estilo customizado."""
+        return st.button('Enviar dados', key='submit', help="Clique para enviar seus dados")
 
     def create_cep_json(self, cep):
         """Cria um dicionário JSON para consulta de CEP."""
@@ -70,16 +72,16 @@ class Webpage:
 
         if self.submit_button():
             if not all([state, city, address]):
-                st.write('Preencha todos os campos corretamente.')
+                st.error('Preencha todos os campos corretamente.')
                 return
 
             address_json = self.create_address_json(state, city, address)
             response = self.data_model.connect_frontend(address_json)
 
             if 'error' in response:
-                st.write(f"{response['error']}")
+                st.error(f"Erro: {response['error']}")
             else:
-                st.write(f"CEP encontrado: {response['api_response']['cep']}")
+                st.success(f"CEP encontrado: {response['api_response']['cep']}")
 
     def handle_cep_request(self):
         """Processa a consulta por CEP."""
@@ -87,16 +89,16 @@ class Webpage:
 
         if self.submit_button():
             if not cep:
-                st.write('Preencha o campo do CEP corretamente.')
+                st.error('Preencha o campo do CEP corretamente.')
                 return
 
             cep_json = self.create_cep_json(cep)
             response = self.data_model.connect_frontend(cep_json)
 
             if 'error' in response:
-                st.write(f"{response['error']}")
+                st.error(f"Erro: {response['error']}")
             elif 'erro' in response['api_response']:
-                st.write('Insira um CEP válido.')
+                st.error('Insira um CEP válido.')
             else:
                 api_response = response['api_response']
-                st.write(f"Endereço correspondente ao CEP: {api_response['logradouro']} - {api_response['bairro']}, {api_response['localidade']}/{api_response['uf']}")
+                st.success(f"Endereço correspondente ao CEP: {api_response['logradouro']} - {api_response['bairro']}, {api_response['localidade']}/{api_response['uf']}")
