@@ -21,6 +21,3 @@ Para realizar essa busca, é necessário informar:
 Basta informar um **CEP válido** (8 dígitos) para obter o endereço completo.  
 
 ---
-
- **Conclusão**  
-O sistema proporciona uma forma **rápida, eficiente e intuitiva** de consultar **CEPs e endereços**, garantindo precisão e praticidade para os usuários!
