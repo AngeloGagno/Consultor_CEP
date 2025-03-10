@@ -10,6 +10,7 @@ class DataModel:
     def validate_cep(self, cep_info):
         """Valida o formato do CEP usando Pydantic."""
         try:
+            cep_info['CEP'] = cep_info['CEP'].replace('-','')
             return CEP(**cep_info)
         except ValidationError:
             return {"error": "CEP inválido! Digite um número de 8 dígitos."}
