@@ -1,11 +1,6 @@
 # Estrutura do Projeto
 ## Estrutura do Projeto em pastas
-    mkdocs.yml          
-    docs/
-        ├── index.md
-        ├── projeto.md
-        ├── frontend.md
-        └── backend.md    
+
     src/
         ├── backend/       
         │   ├── data_contract/
